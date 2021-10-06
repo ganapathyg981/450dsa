@@ -10,18 +10,18 @@ public class String2 {
 	static void palindrome(String ip) {
 		int start=0;
 		int end=ip.length()-1;
-		int count=0;
 		for(int i=0;i<ip.length()/2;i++) {
-			if(ip.charAt(start)!=ip.charAt(end))
-				count++;
+			if(ip.charAt(start)!=ip.charAt(end)) {
+				System.out.println(" not Panlindrome");
+				return;
+			}
 			start++;
 			end--;
 			
 		}
-		if(count==0)
-			System.out.println("Palindrome");
-		else
-			System.out.print("Not A Palindrome");
+		System.out.println("Panlindrome");
+	
+	
 	}
 	
 }
