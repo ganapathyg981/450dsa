@@ -1,18 +1,18 @@
 package backtracking;
 
-import java.util.Objects;
-
 public class BT16 {
     public static void main(String[] args) {
          int maze[][] = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 1, 0, 1, 1, 0, 1, 1, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
         boolean[][] visited= new boolean[maze.length][maze[0].length];
-        solveMaze(maze,0,0,"",visited);
+        int longest[]={-99};
+        solveMaze(maze,0,0,"",visited, 1, 7 ,longest);
+        System.out.println(longest[0]);
 
     }
 
-    private static void solveMaze(int[][] maze, int row, int col, String path,boolean[][] visited) {
+    private static void solveMaze(int[][] maze, int row, int col, String path, boolean[][] visited, int destr, int destc,int[] longest) {
         int r[]={1,0,0,-1};
         int c[]={0,-1,1,0};
         String d[]={"D","L","R","U"};
@@ -20,15 +20,16 @@ public class BT16 {
 //                col == maze.length || visited[row][col] ||
 //                maze[row][col] == 0)
 //            return;
-        if(row==maze.length-1&&col==maze[0].length-1){
-            System.out.println(path);
+        if(row==destr&&col==destc){
+            if(path.length()>longest[0])
+                longest[0]=path.length();
             return;
         }
         for (int i = 0; i < r.length; i++) {
             if(isValid(maze,row+r[i],col+c[i],visited)){
                 visited[row+r[i]][col+c[i]]=true;
                 path+=d[i];
-                solveMaze(maze,row+r[i],col+c[i],path,visited);
+                solveMaze(maze,row+r[i],col+c[i],path,visited, 1, 7,longest);
                 path = path.substring(0, path.length() - 1);
                 visited[row+r[i]][col+c[i]]=false;
             }

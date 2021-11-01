@@ -6,7 +6,6 @@ public class BT17 {
                 { 3,4 } };
         boolean[][] visited= new boolean[maze.length][maze[0].length];
         solveMaze(maze,0,0,String.valueOf(maze[0][0]),visited);
-
     }
 
     private static void solveMaze(int[][] maze, int row, int col, String path,boolean[][] visited) {
@@ -27,9 +26,6 @@ public class BT17 {
         }
 
         return;
-
-
-
     }
 
     private static boolean isValid(int[][] maze, int row, int col,boolean [][] visited) {
