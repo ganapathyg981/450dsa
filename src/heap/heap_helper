@@ -1,0 +1,22 @@
+
+
+
+PARENT = i
+L-Child = 2i+1  floor
+R-Child = 2i+2   floor
+
+if child =i
+parent =i/2 - 1
+
+max node at any level= 2^h
+
+
+total max nodes = 2^(h+1)-1
+
+h=log(N)
+// for 0 based height
+
+
+internal nodes =[0,floor(N/2-1)]
+leaf nodes=[N/2,N-1]
+

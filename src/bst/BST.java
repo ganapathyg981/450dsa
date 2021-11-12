@@ -1,5 +1,8 @@
-package tree;
+package bst;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 class Node{
@@ -8,6 +11,10 @@ class Node{
     Node right;
     Node(int value){
         this.value=value;
+    }
+    public String toString(){
+
+        return String.valueOf(this.value);
     }
 }
 public class BST {
@@ -18,7 +25,6 @@ public class BST {
     BST (){
         root=null;
     }
-
     void insert(int key){
         Node node= new Node(key);
         if(this.root==null)
@@ -89,7 +95,23 @@ public class BST {
             }
 
     }
-
+    void BFS_OPT(){
+        Node currentNode=this.root;
+        Queue<Node> q =new LinkedList();
+        LinkedList<Node> list= new LinkedList<>();
+        q.add(currentNode);
+        while(q.size()>0){
+            currentNode=q.poll();
+            System.out.print(currentNode.value + " ");
+            list.add(currentNode);
+            if(currentNode.left!=null){
+                q.add(currentNode.left);
+            }
+            if(currentNode.right!=null){
+                q.add(currentNode.right);
+            }
+        }
+    }
     Node inorderPreceder(Node node){
         Node currentNode=node.right;
         Node temp=null;
@@ -117,4 +139,55 @@ public class BST {
             }
         }
     }
+    void BFS_RECURSION(){
+        Node currentNode=this.root;
+        Queue<Node> q= new LinkedList();
+        List<Integer> l = new LinkedList();
+        q.add(currentNode);
+        BFS_HELPER(q,l);
+    }
+    private void BFS_HELPER(Queue<Node> q, List<Integer> l){
+        if(q.size()==0)
+            return;
+        Node node=q.poll();
+        System.out.print(node.value+ " ");
+        l.add(node.value);
+        if(node.left!=null){
+            q.add(node.left);
+        }
+        if(node.right!=null){
+            q.add(node.right);
+        }
+        BFS_HELPER(q,l);
+    }
+
+    boolean search(int key,Node currentNode){
+        if(currentNode.value==key)
+            return true;
+        if(key<currentNode.value&&currentNode.left!=null)
+            return search(key,currentNode.left);
+        if(key>currentNode.value&&currentNode.right!=null)
+            return search(key,currentNode.right);
+        return false;
+    }
+
+    int findMax(Node currentNode,int max){
+       if(max<currentNode.value)
+           max=currentNode.value;
+       if(currentNode.left!=null)
+           max=findMax(currentNode.left,max);
+       if(currentNode.right!=null)
+           max=findMax(currentNode.right,max);
+       return max;
+    }
+    int findMin(Node currentNode,int min){
+        if(min>currentNode.value)
+            min=currentNode.value;
+        if(currentNode.left!=null)
+            min=findMin(currentNode.left,min);
+        if(currentNode.right!=null)
+            min=findMin(currentNode.right,min);
+        return min;
+    }
+
 }
