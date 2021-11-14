@@ -175,4 +175,82 @@ public class Btree {
         }
         return Math.max(height(root.left),height(root.right))+1;
     }
+    int findDist(Node root, int a, int b) {
+        Node lca=findLCA(root,a,b);
+        return findDistHelper(lca,b,0)+findDistHelper(lca,a,0);
+    }
+    int findDistHelper(Node root,int key,int depth){
+        if(root==null){
+            return 0;
+        }
+        if(root.data==key){
+            return depth;
+        }
+        int lr=findDistHelper(root.left,key,depth+1);
+        int rr=findDistHelper(root.right,key,depth+1);
+        if(lr>0)
+            return lr;
+        else
+            return rr;
+    }
+    Node findLCA(Node root,int n1,int n2){
+        if(root==null){
+            return null;
+        }
+        if(root.data==n1||root.data==n2) {
+//            System.out.println(root.data);
+            return root;
+        }
+        Node ls=findLCA(root.left,n1,n2);
+        Node rs=findLCA(root.right,n1,n2);
+//        System.out.println(root+"--"+ls+"--"+ rs);
+        if(ls!=null&&rs!=null) {
+//            System.out.println("Came here");
+            return root;
+        }
+        else if(ls!=null)
+            return ls;
+        else if(rs!=null)
+            return rs;
+        return null;
+    }
+    void findLargestSum(Node root){
+        int[] max={Integer.MIN_VALUE};
+        findLargestSum(root,max);
+        System.out.println(max[0]);
+    }
+
+    private int findLargestSum(Node root,int[] max){
+        if(root==null)
+            return 0;
+       int sum= root.data+
+        findLargestSum(root.left,max)+findLargestSum(root.right,max);
+        if(max[0]<sum)
+            max[0]=sum;
+        return sum;
+    }
+
+    void treeFromString(String s){
+        System.out.println(s.substring(0,1));
+        if(s.length()<=1)
+            return;
+        String children=s.substring(1);
+        Stack<Character> stack= new Stack<>();
+        stack.add(children.charAt(0));
+        int leftEndIndex = 0;
+        for (int i = 1; i < children.length(); i++) {
+            if(children.charAt(i)=='(')
+                stack.push('(');
+            else if(children.charAt(i)==')')
+                stack.pop();
+            if(stack.size()==0) {
+                leftEndIndex = i;
+                break;
+            }
+        }
+        treeFromString(children.substring(1,leftEndIndex));
+        if(children.length()-1>leftEndIndex)
+        treeFromString(children.substring(leftEndIndex+2,children.length()-1));
+    }
+
 }
