@@ -1,5 +1,7 @@
 package binarytree;
 
+import java.util.LinkedList;
+
 public class Btree1 {
     public static void main(String[] args) {
         Btree btree= new Btree();
