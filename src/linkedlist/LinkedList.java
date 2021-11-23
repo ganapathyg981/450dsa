@@ -34,6 +34,7 @@ public class LinkedList {
                 current=current.next;
             }
         }
+        System.out.println();
     }
 
     void reverse(){
@@ -51,5 +52,17 @@ public class LinkedList {
             prev=current;
             current=next;
         }
+    }
+
+    Node getMiddle(){
+        if(head==null||head.next==null)
+            return head;
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null&&fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
     }
 }

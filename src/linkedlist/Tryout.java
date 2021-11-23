@@ -10,10 +10,10 @@ public class Tryout {
         list.add(3);
         list.add(4);
         list.add(5);
+        list.add(6);
+        list.add(7);
         list.print();
-        list.reverse();
-        System.out.println();
-        list.print();
+        System.out.println(list.getMiddle().data);
 
     }
 }
