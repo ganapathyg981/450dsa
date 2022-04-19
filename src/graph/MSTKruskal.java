@@ -67,13 +67,17 @@ class DisjointSet{
         rank=new int[i];
         Arrays.fill(rank,0);
         parent=new int[i];
-        for (int j = 0; j < parent.length; j++) {
+        for (int j = 1; j < parent.length; j++) {
          parent[j]=j;
         }
     }
 
-    int findParent(){
-        return 1;
+    int findParent(int node){
+        if(node==parent[node])
+        return node;
+        else{
+            return parent[node]=findParent(parent[node]);
+        }
     }
 
     void union(int first,int second){

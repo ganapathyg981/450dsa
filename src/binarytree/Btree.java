@@ -3,9 +3,9 @@ package binarytree;
 import java.util.*;
 
 class Node{
-    int data;
-    Node left;
-    Node right;
+    public int data;
+    public Node left;
+    public Node right;
     Node(int data){
         this.data=data;
         this.left=null;
@@ -22,8 +22,8 @@ class Node{
     }
 }
 public class Btree {
-    Node root;
-    Btree(){
+    public Node root;
+    public Btree(){
         root=new Node();
     }
     ArrayList<Integer> levelOrder(){
